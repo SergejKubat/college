@@ -25,8 +25,13 @@ Ensure you have the following installed on your machine:
 Clone the repository:
 
 ```bash
-   git clone https://github.com/SergejKubat/college
-   cd college
+git clone https://github.com/SergejKubat/college
+```
+
+Change into the project directory:
+
+```bash
+cd college
 ```
 
 ## Configuration
@@ -38,23 +43,31 @@ Update the application.properties file with the appropriate configuration for yo
 spring.datasource.url=jdbc:h2:mem:test_db
 spring.datasource.driverClassName=org.h2.Driver
 spring.datasource.username=sa
-spring.datasource.password=password
+spring.datasource.password=
+
+spring.jpa.show-sql=true
+spring.jpa.database-platform=org.hibernate.dialect.H2Dialect
+
+# Hibernate ddl auto (create, create-drop, validate, update)
+spring.jpa.hibernate.ddl-auto=update
 
 spring.h2.console.enabled=true
 spring.h2.console.path=/h2-console
 spring.h2.console.settings.trace=false
 spring.h2.console.settings.web-allow-others=false
 
-spring.jpa.database-platform=org.hibernate.dialect.H2Dialect
-
-# Postgres Database Configuration
+# Postgres Database Configuration (for production)
 # Uncomment and update the following properties for production or alternative database
 # spring.datasource.url=jdbc:postgresql://localhost:5432/your_database
 # spring.datasource.username=your_username
 # spring.datasource.password=your_password
 # spring.datasource.driverClassName=org.postgresql.Driver
 
+# spring.jpa.properties.hibernate.jdbc.lob.non_contextual_creation=true
 # spring.jpa.database-platform=org.hibernate.dialect.PostgreSQLDialect
+
+# Hibernate ddl auto (create, create-drop, validate, update)
+# spring.jpa.hibernate.ddl-auto=update
 ```
 
 ## Database
@@ -67,13 +80,13 @@ application.properties file.
 Build the project using Maven:
 
 ```bash
-    mvn clean install
+mvn clean install
 ```
 
 Run the application:
 
 ```bash
-    mvn spring-boot:run
+mvn spring-boot:run
 ```
 
 The application will start on http://localhost:8080.
