@@ -11,19 +11,23 @@ public class AcademicTitle {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "name")
-    private String name;
+    @Column(name = "title", length = 100)
+    private String title;
 
-    @OneToMany(mappedBy = "academic_title", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "academicTitle", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Member> members;
+
+    @OneToMany(mappedBy = "academicTitle", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<AcademicTitleHistory> academicTitleHistories;
 
     public AcademicTitle() {
     }
 
-    public AcademicTitle(Long id, String name, Set<Member> members) {
+    public AcademicTitle(Long id, String title, Set<Member> members, Set<AcademicTitleHistory> academicTitleHistories) {
         this.id = id;
-        this.name = name;
+        this.title = title;
         this.members = members;
+        this.academicTitleHistories = academicTitleHistories;
     }
 
     public Long getId() {
@@ -34,12 +38,12 @@ public class AcademicTitle {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getTitle() {
+        return title;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public Set<Member> getMembers() {
@@ -48,5 +52,13 @@ public class AcademicTitle {
 
     public void setMembers(Set<Member> members) {
         this.members = members;
+    }
+
+    public Set<AcademicTitleHistory> getAcademicTitleHistories() {
+        return academicTitleHistories;
+    }
+
+    public void setAcademicTitleHistories(Set<AcademicTitleHistory> academicTitleHistories) {
+        this.academicTitleHistories = academicTitleHistories;
     }
 }

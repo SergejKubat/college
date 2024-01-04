@@ -11,18 +11,18 @@ public class EducationTitle {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "name")
-    private String name;
+    @Column(name = "title", length = 100)
+    private String title;
 
-    @OneToMany(mappedBy = "education_title", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "educationTitle", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Member> members;
 
     public EducationTitle() {
     }
 
-    public EducationTitle(Long id, String name, Set<Member> members) {
+    public EducationTitle(Long id, String title, Set<Member> members) {
         this.id = id;
-        this.name = name;
+        this.title = title;
         this.members = members;
     }
 
@@ -34,12 +34,12 @@ public class EducationTitle {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getTitle() {
+        return title;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public Set<Member> getMembers() {

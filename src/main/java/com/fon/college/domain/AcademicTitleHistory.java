@@ -33,4 +33,59 @@ public class AcademicTitleHistory {
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JsonIgnore
     private ScientificField scientificField;
+
+    public AcademicTitleHistory() {
+    }
+
+    public AcademicTitleHistory(Long id,
+                                Date startDate,
+                                Date endDate,
+                                AcademicTitle academicTitle,
+                                ScientificField scientificField) {
+        this.id = id;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.academicTitle = academicTitle;
+        this.scientificField = scientificField;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Date getStartDate() {
+        return startDate;
+    }
+
+    public void setStartDate(Date startDate) {
+        this.startDate = startDate;
+    }
+
+    public Date getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(Date endDate) {
+        this.endDate = endDate;
+    }
+
+    public AcademicTitle getAcademicTitle() {
+        return academicTitle;
+    }
+
+    public void setAcademicTitle(AcademicTitle academicTitle) {
+        this.academicTitle = academicTitle;
+    }
+
+    public ScientificField getScientificField() {
+        return scientificField;
+    }
+
+    public void setScientificField(ScientificField scientificField) {
+        this.scientificField = scientificField;
+    }
 }

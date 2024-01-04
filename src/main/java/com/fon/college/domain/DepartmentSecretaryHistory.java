@@ -8,23 +8,23 @@ import org.hibernate.annotations.OnDeleteAction;
 import java.util.Date;
 
 @Entity
-@Table(name = "manager_history")
-public class ManagerHistory {
+@Table(name = "secretary_history")
+public class DepartmentSecretaryHistory {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "manager_id", nullable = false)
-    @OnDelete(action = OnDeleteAction.CASCADE)
-    @JsonIgnore
-    private Member manager;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "department_id", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JsonIgnore
     private Department department;
+
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "secretary_id", nullable = false)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    @JsonIgnore
+    private Member secretary;
 
     @Column(name = "start_date")
     @Temporal(TemporalType.DATE)
@@ -34,12 +34,12 @@ public class ManagerHistory {
     @Temporal(TemporalType.DATE)
     private Date endDate;
 
-    public ManagerHistory() {
+    public DepartmentSecretaryHistory() {
     }
 
-    public ManagerHistory(Long id, Member manager, Department department, Date startDate, Date endDate) {
+    public DepartmentSecretaryHistory(Long id, Member secretary, Department department, Date startDate, Date endDate) {
         this.id = id;
-        this.manager = manager;
+        this.secretary = secretary;
         this.department = department;
         this.startDate = startDate;
         this.endDate = endDate;
@@ -53,12 +53,12 @@ public class ManagerHistory {
         this.id = id;
     }
 
-    public Member getManager() {
-        return manager;
+    public Member getSecretary() {
+        return secretary;
     }
 
-    public void setManager(Member manager) {
-        this.manager = manager;
+    public void setSecretary(Member secretary) {
+        this.secretary = secretary;
     }
 
     public Department getDepartment() {

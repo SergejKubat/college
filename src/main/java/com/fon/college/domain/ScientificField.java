@@ -11,19 +11,23 @@ public class ScientificField {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "name")
-    private String name;
+    @Column(name = "field", length = 100)
+    private String field;
 
-    @OneToMany(mappedBy = "scientific_field", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "scientificField", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Member> members;
+
+    @OneToMany(mappedBy = "scientificField", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<AcademicTitleHistory> academicTitleHistories;
 
     public ScientificField() {
     }
 
-    public ScientificField(Long id, String name, Set<Member> members) {
+    public ScientificField(Long id, String field, Set<Member> members, Set<AcademicTitleHistory> academicTitleHistories) {
         this.id = id;
-        this.name = name;
+        this.field = field;
         this.members = members;
+        this.academicTitleHistories = academicTitleHistories;
     }
 
     public Long getId() {
@@ -34,12 +38,12 @@ public class ScientificField {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getField() {
+        return field;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setField(String field) {
+        this.field = field;
     }
 
     public Set<Member> getMembers() {
@@ -48,5 +52,13 @@ public class ScientificField {
 
     public void setMembers(Set<Member> members) {
         this.members = members;
+    }
+
+    public Set<AcademicTitleHistory> getAcademicTitleHistories() {
+        return academicTitleHistories;
+    }
+
+    public void setAcademicTitleHistories(Set<AcademicTitleHistory> academicTitleHistories) {
+        this.academicTitleHistories = academicTitleHistories;
     }
 }

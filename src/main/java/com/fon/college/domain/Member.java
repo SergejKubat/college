@@ -20,12 +20,6 @@ public class Member {
     @Column(name = "last_name", length = 100)
     private String lastName;
 
-    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<ManagerHistory> managerHistories;
-
-    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<SecretaryHistory> secretaryHistories;
-
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "department_id", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
@@ -50,11 +44,17 @@ public class Member {
     @JsonIgnore
     private ScientificField scientificField;
 
-    @OneToOne(mappedBy = "member")
+    @OneToOne(mappedBy = "currentManager")
     private Department managerDepartment;
 
-    @OneToOne(mappedBy = "member")
+    @OneToOne(mappedBy = "currentSecretary")
     private Department secretaryDepartment;
+
+    @OneToMany(mappedBy = "manager", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<DepartmentManagerHistory> managerHistories;
+
+    @OneToMany(mappedBy = "secretary", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<DepartmentSecretaryHistory> secretaryHistories;
 
     public Member() {
     }
@@ -62,23 +62,23 @@ public class Member {
     public Member(Long id,
                   String firstName,
                   String lastName,
-                  Set<ManagerHistory> managerHistories,
-                  Set<SecretaryHistory> secretaryHistories,
                   Department department,
                   AcademicTitle academicTitle,
                   EducationTitle educationTitle,
                   ScientificField scientificField,
+                  Set<DepartmentManagerHistory> managerHistories,
+                  Set<DepartmentSecretaryHistory> secretaryHistories,
                   Department managerDepartment,
                   Department secretaryDepartment) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
-        this.managerHistories = managerHistories;
-        this.secretaryHistories = secretaryHistories;
         this.department = department;
         this.academicTitle = academicTitle;
         this.educationTitle = educationTitle;
         this.scientificField = scientificField;
+        this.managerHistories = managerHistories;
+        this.secretaryHistories = secretaryHistories;
         this.managerDepartment = managerDepartment;
         this.secretaryDepartment = secretaryDepartment;
     }
@@ -105,22 +105,6 @@ public class Member {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
-    }
-
-    public Set<ManagerHistory> getManagerHistories() {
-        return managerHistories;
-    }
-
-    public void setManagerHistories(Set<ManagerHistory> managerHistories) {
-        this.managerHistories = managerHistories;
-    }
-
-    public Set<SecretaryHistory> getSecretaryHistories() {
-        return secretaryHistories;
-    }
-
-    public void setSecretaryHistories(Set<SecretaryHistory> secretaryHistories) {
-        this.secretaryHistories = secretaryHistories;
     }
 
     public Department getDepartment() {
@@ -153,6 +137,22 @@ public class Member {
 
     public void setScientificField(ScientificField scientificField) {
         this.scientificField = scientificField;
+    }
+
+    public Set<DepartmentManagerHistory> getManagerHistories() {
+        return managerHistories;
+    }
+
+    public void setManagerHistories(Set<DepartmentManagerHistory> managerHistories) {
+        this.managerHistories = managerHistories;
+    }
+
+    public Set<DepartmentSecretaryHistory> getSecretaryHistories() {
+        return secretaryHistories;
+    }
+
+    public void setSecretaryHistories(Set<DepartmentSecretaryHistory> secretaryHistories) {
+        this.secretaryHistories = secretaryHistories;
     }
 
     public Department getManagerDepartment() {

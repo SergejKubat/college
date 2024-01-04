@@ -75,6 +75,8 @@ spring.h2.console.settings.web-allow-others=false
 This project supports both H2 and Postgres databases. You can choose the desired database by updating the 
 application.properties file.
 
+Schema: https://drawsql.app/teams/fon/diagrams/college
+
 ## Build and Run
 
 Build the project using Maven:

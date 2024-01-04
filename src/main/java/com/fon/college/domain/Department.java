@@ -17,6 +17,14 @@ public class Department {
     @Column(name = "short_name", unique = true, length = 50)
     private String shortName;
 
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "current_manager_id", referencedColumnName = "id")
+    private Member currentManager;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "current_secretary_id", referencedColumnName = "id")
+    private Member currentSecretary;
+
     @OneToMany(mappedBy = "department", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Subject> subjects;
 
@@ -24,18 +32,10 @@ public class Department {
     private Set<Member> members;
 
     @OneToMany(mappedBy = "department", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<ManagerHistory> managerHistories;
+    private Set<DepartmentManagerHistory> managerHistories;
 
     @OneToMany(mappedBy = "department", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<SecretaryHistory> secretaryHistories;
-
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "manager_id", referencedColumnName = "id")
-    private Member manager;
-
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "secretary_id", referencedColumnName = "id")
-    private Member secretary;
+    private Set<DepartmentSecretaryHistory> secretaryHistories;
 
     public Department() {
     }
@@ -43,21 +43,21 @@ public class Department {
     public Department(Long id,
                       String name,
                       String shortName,
+                      Member currentManager,
+                      Member currentSecretary,
                       Set<Subject> subjects,
                       Set<Member> members,
-                      Set<ManagerHistory> managerHistories,
-                      Set<SecretaryHistory> secretaryHistories,
-                      Member manager,
-                      Member secretary) {
+                      Set<DepartmentManagerHistory> managerHistories,
+                      Set<DepartmentSecretaryHistory> secretaryHistories) {
         this.id = id;
         this.name = name;
         this.shortName = shortName;
+        this.currentManager = currentManager;
+        this.currentSecretary = currentSecretary;
         this.subjects = subjects;
         this.members = members;
         this.managerHistories = managerHistories;
         this.secretaryHistories = secretaryHistories;
-        this.manager = manager;
-        this.secretary = secretary;
     }
 
     public Long getId() {
@@ -84,6 +84,22 @@ public class Department {
         this.shortName = shortName;
     }
 
+    public Member getCurrentManager() {
+        return currentManager;
+    }
+
+    public void setCurrentManager(Member currentManager) {
+        this.currentManager = currentManager;
+    }
+
+    public Member getCurrentSecretary() {
+        return currentSecretary;
+    }
+
+    public void setCurrentSecretary(Member currentSecretary) {
+        this.currentSecretary = currentSecretary;
+    }
+
     public Set<Subject> getSubjects() {
         return subjects;
     }
@@ -100,35 +116,19 @@ public class Department {
         this.members = members;
     }
 
-    public Member getManager() {
-        return manager;
-    }
-
-    public void setManager(Member manager) {
-        this.manager = manager;
-    }
-
-    public Member getSecretary() {
-        return secretary;
-    }
-
-    public void setSecretary(Member secretary) {
-        this.secretary = secretary;
-    }
-
-    public Set<ManagerHistory> getManagerHistories() {
+    public Set<DepartmentManagerHistory> getManagerHistories() {
         return managerHistories;
     }
 
-    public void setManagerHistories(Set<ManagerHistory> managerHistories) {
+    public void setManagerHistories(Set<DepartmentManagerHistory> managerHistories) {
         this.managerHistories = managerHistories;
     }
 
-    public Set<SecretaryHistory> getSecretaryHistories() {
+    public Set<DepartmentSecretaryHistory> getSecretaryHistories() {
         return secretaryHistories;
     }
 
-    public void setSecretaryHistories(Set<SecretaryHistory> secretaryHistories) {
+    public void setSecretaryHistories(Set<DepartmentSecretaryHistory> secretaryHistories) {
         this.secretaryHistories = secretaryHistories;
     }
 }
