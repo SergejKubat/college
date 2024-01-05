@@ -1,6 +1,5 @@
 package com.fon.college.controller;
 
-import com.fon.college.payload.DepartmentDto;
 import com.fon.college.payload.SubjectDto;
 import com.fon.college.service.SubjectService;
 import org.springframework.http.HttpStatus;
