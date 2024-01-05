@@ -1,11 +1,9 @@
 package com.fon.college.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import jakarta.persistence.*;
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
-
+import java.util.HashSet;
 import java.util.Set;
+
+import jakarta.persistence.*;
 
 @Entity
 @Table(name = "member")
@@ -22,26 +20,18 @@ public class Member {
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "department_id", nullable = false)
-    @OnDelete(action = OnDeleteAction.CASCADE)
-    @JsonIgnore
     private Department department;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "academic_title_id", nullable = false)
-    @OnDelete(action = OnDeleteAction.CASCADE)
-    @JsonIgnore
     private AcademicTitle academicTitle;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "education_title_id", nullable = false)
-    @OnDelete(action = OnDeleteAction.CASCADE)
-    @JsonIgnore
     private EducationTitle educationTitle;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "scientific_field_id", nullable = false)
-    @OnDelete(action = OnDeleteAction.CASCADE)
-    @JsonIgnore
     private ScientificField scientificField;
 
     @OneToOne(mappedBy = "currentManager")
@@ -50,11 +40,14 @@ public class Member {
     @OneToOne(mappedBy = "currentSecretary")
     private Department secretaryDepartment;
 
+    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL, orphanRemoval = true)
+    private final Set<AcademicTitleHistory> academicTitleHistories = new HashSet<>();
+
     @OneToMany(mappedBy = "manager", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<DepartmentManagerHistory> managerHistories;
+    private final Set<DepartmentManagerHistory> managerHistories = new HashSet<>();
 
     @OneToMany(mappedBy = "secretary", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<DepartmentSecretaryHistory> secretaryHistories;
+    private final Set<DepartmentSecretaryHistory> secretaryHistories = new HashSet<>();
 
     public Member() {
     }
@@ -65,11 +58,7 @@ public class Member {
                   Department department,
                   AcademicTitle academicTitle,
                   EducationTitle educationTitle,
-                  ScientificField scientificField,
-                  Set<DepartmentManagerHistory> managerHistories,
-                  Set<DepartmentSecretaryHistory> secretaryHistories,
-                  Department managerDepartment,
-                  Department secretaryDepartment) {
+                  ScientificField scientificField) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -77,10 +66,6 @@ public class Member {
         this.academicTitle = academicTitle;
         this.educationTitle = educationTitle;
         this.scientificField = scientificField;
-        this.managerHistories = managerHistories;
-        this.secretaryHistories = secretaryHistories;
-        this.managerDepartment = managerDepartment;
-        this.secretaryDepartment = secretaryDepartment;
     }
 
     public Long getId() {
@@ -139,22 +124,6 @@ public class Member {
         this.scientificField = scientificField;
     }
 
-    public Set<DepartmentManagerHistory> getManagerHistories() {
-        return managerHistories;
-    }
-
-    public void setManagerHistories(Set<DepartmentManagerHistory> managerHistories) {
-        this.managerHistories = managerHistories;
-    }
-
-    public Set<DepartmentSecretaryHistory> getSecretaryHistories() {
-        return secretaryHistories;
-    }
-
-    public void setSecretaryHistories(Set<DepartmentSecretaryHistory> secretaryHistories) {
-        this.secretaryHistories = secretaryHistories;
-    }
-
     public Department getManagerDepartment() {
         return managerDepartment;
     }
@@ -169,5 +138,29 @@ public class Member {
 
     public void setSecretaryDepartment(Department secretaryDepartment) {
         this.secretaryDepartment = secretaryDepartment;
+    }
+
+    public Set<AcademicTitleHistory> getAcademicTitleHistories() {
+        return academicTitleHistories;
+    }
+
+    public void setAcademicTitleHistories(Set<AcademicTitleHistory> academicTitleHistories) {
+        this.academicTitleHistories.addAll(academicTitleHistories);
+    }
+
+    public Set<DepartmentManagerHistory> getManagerHistories() {
+        return managerHistories;
+    }
+
+    public void setManagerHistories(Set<DepartmentManagerHistory> managerHistories) {
+        this.managerHistories.addAll(managerHistories);
+    }
+
+    public Set<DepartmentSecretaryHistory> getSecretaryHistories() {
+        return secretaryHistories;
+    }
+
+    public void setSecretaryHistories(Set<DepartmentSecretaryHistory> secretaryHistories) {
+        this.secretaryHistories.addAll(secretaryHistories);
     }
 }

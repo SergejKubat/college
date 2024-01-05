@@ -1,11 +1,8 @@
 package com.fon.college.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import jakarta.persistence.*;
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
-
 import java.util.Date;
+
+import jakarta.persistence.*;
 
 @Entity
 @Table(name = "academic_title_history")
@@ -23,15 +20,15 @@ public class AcademicTitleHistory {
     private Date endDate;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "member_id", nullable = false)
+    private Member member;
+
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "academic_title_id", nullable = false)
-    @OnDelete(action = OnDeleteAction.CASCADE)
-    @JsonIgnore
     private AcademicTitle academicTitle;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "scientific_field_id", nullable = false)
-    @OnDelete(action = OnDeleteAction.CASCADE)
-    @JsonIgnore
     private ScientificField scientificField;
 
     public AcademicTitleHistory() {
@@ -40,11 +37,13 @@ public class AcademicTitleHistory {
     public AcademicTitleHistory(Long id,
                                 Date startDate,
                                 Date endDate,
+                                Member member,
                                 AcademicTitle academicTitle,
                                 ScientificField scientificField) {
         this.id = id;
         this.startDate = startDate;
         this.endDate = endDate;
+        this.member = member;
         this.academicTitle = academicTitle;
         this.scientificField = scientificField;
     }
@@ -71,6 +70,14 @@ public class AcademicTitleHistory {
 
     public void setEndDate(Date endDate) {
         this.endDate = endDate;
+    }
+
+    public Member getMember() {
+        return member;
+    }
+
+    public void setMember(Member member) {
+        this.member = member;
     }
 
     public AcademicTitle getAcademicTitle() {

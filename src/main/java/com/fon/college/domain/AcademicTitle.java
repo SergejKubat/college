@@ -1,8 +1,9 @@
 package com.fon.college.domain;
 
-import jakarta.persistence.*;
-
+import java.util.HashSet;
 import java.util.Set;
+
+import jakarta.persistence.*;
 
 @Entity
 @Table(name = "academic_title")
@@ -15,19 +16,17 @@ public class AcademicTitle {
     private String title;
 
     @OneToMany(mappedBy = "academicTitle", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<Member> members;
+    private final Set<Member> members = new HashSet<>();
 
     @OneToMany(mappedBy = "academicTitle", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<AcademicTitleHistory> academicTitleHistories;
+    private final Set<AcademicTitleHistory> academicTitleHistories = new HashSet<>();
 
     public AcademicTitle() {
     }
 
-    public AcademicTitle(Long id, String title, Set<Member> members, Set<AcademicTitleHistory> academicTitleHistories) {
+    public AcademicTitle(Long id, String title) {
         this.id = id;
         this.title = title;
-        this.members = members;
-        this.academicTitleHistories = academicTitleHistories;
     }
 
     public Long getId() {
@@ -51,7 +50,7 @@ public class AcademicTitle {
     }
 
     public void setMembers(Set<Member> members) {
-        this.members = members;
+        this.members.addAll(members);
     }
 
     public Set<AcademicTitleHistory> getAcademicTitleHistories() {
@@ -59,6 +58,6 @@ public class AcademicTitle {
     }
 
     public void setAcademicTitleHistories(Set<AcademicTitleHistory> academicTitleHistories) {
-        this.academicTitleHistories = academicTitleHistories;
+        this.academicTitleHistories.addAll(academicTitleHistories);
     }
 }

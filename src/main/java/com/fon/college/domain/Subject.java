@@ -1,8 +1,5 @@
 package com.fon.college.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
 import jakarta.persistence.*;
 
 @Entity
@@ -20,8 +17,6 @@ public class Subject {
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "department_id", nullable = false)
-    @OnDelete(action = OnDeleteAction.CASCADE)
-    @JsonIgnore
     private Department department;
 
     public Subject() {

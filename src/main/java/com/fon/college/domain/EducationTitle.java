@@ -1,8 +1,9 @@
 package com.fon.college.domain;
 
-import jakarta.persistence.*;
-
+import java.util.HashSet;
 import java.util.Set;
+
+import jakarta.persistence.*;
 
 @Entity
 @Table(name = "education_title")
@@ -15,15 +16,14 @@ public class EducationTitle {
     private String title;
 
     @OneToMany(mappedBy = "educationTitle", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<Member> members;
+    private final Set<Member> members = new HashSet<>();
 
     public EducationTitle() {
     }
 
-    public EducationTitle(Long id, String title, Set<Member> members) {
+    public EducationTitle(Long id, String title) {
         this.id = id;
         this.title = title;
-        this.members = members;
     }
 
     public Long getId() {
@@ -47,6 +47,6 @@ public class EducationTitle {
     }
 
     public void setMembers(Set<Member> members) {
-        this.members = members;
+        this.members.addAll(members);
     }
 }

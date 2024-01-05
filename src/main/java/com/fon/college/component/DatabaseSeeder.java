@@ -1,9 +1,11 @@
 package com.fon.college.component;
 
-import com.fon.college.domain.*;
-import com.fon.college.repository.*;
+import java.util.Date;
+
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
+import com.fon.college.domain.*;
+import com.fon.college.repository.*;
 
 @Component
 public class DatabaseSeeder implements CommandLineRunner {
@@ -13,9 +15,9 @@ public class DatabaseSeeder implements CommandLineRunner {
     private final AcademicTitleRepository _academicTitleRepository;
     private final EducationTitleRepository _educationTitleRepository;
     private final ScientificFieldRepository _scientificFieldRepository;
-    private final AcademicTitleHistoryRepository _AcademicTitleHistoryRepository;
-    private final DepartmentManagerHistoryRepository _DepartmentManagerHistoryRepository;
-    private final DepartmentSecretaryHistoryRepository _DepartmentSecretaryHistoryRepository;
+    private final AcademicTitleHistoryRepository _academicTitleHistoryRepository;
+    private final DepartmentManagerHistoryRepository _departmentManagerHistoryRepository;
+    private final DepartmentSecretaryHistoryRepository _departmentSecretaryHistoryRepository;
 
     public DatabaseSeeder(DepartmentRepository departmentRepository,
                           SubjectRepository subjectRepository,
@@ -23,82 +25,69 @@ public class DatabaseSeeder implements CommandLineRunner {
                           AcademicTitleRepository academicTitleRepository,
                           EducationTitleRepository educationTitleRepository,
                           ScientificFieldRepository scientificFieldRepository,
-                          AcademicTitleHistoryRepository AcademicTitleHistoryRepository,
-                          DepartmentManagerHistoryRepository DepartmentManagerHistoryRepository,
-                          DepartmentSecretaryHistoryRepository DepartmentSecretaryHistoryRepository) {
+                          AcademicTitleHistoryRepository academicTitleHistoryRepository,
+                          DepartmentManagerHistoryRepository departmentManagerHistoryRepository,
+                          DepartmentSecretaryHistoryRepository departmentSecretaryHistoryRepository) {
         _departmentRepository = departmentRepository;
         _subjectRepository = subjectRepository;
         _memberRepository = memberRepository;
         _academicTitleRepository = academicTitleRepository;
         _educationTitleRepository = educationTitleRepository;
         _scientificFieldRepository = scientificFieldRepository;
-        _AcademicTitleHistoryRepository = AcademicTitleHistoryRepository;
-        _DepartmentManagerHistoryRepository = DepartmentManagerHistoryRepository;
-        _DepartmentSecretaryHistoryRepository = DepartmentSecretaryHistoryRepository;
+        _academicTitleHistoryRepository = academicTitleHistoryRepository;
+        _departmentManagerHistoryRepository = departmentManagerHistoryRepository;
+        _departmentSecretaryHistoryRepository = departmentSecretaryHistoryRepository;
     }
 
     @Override
     public void run(String... args) throws Exception {
+        // seed department
+        Department department = _departmentRepository.save(new Department(null, "Department 1",
+                "Dept 1"));
+
+        // seed subjects
+        _subjectRepository.save(new Subject(null, "Subject 1", 6, department));
+        _subjectRepository.save(new Subject(null, "Subject 2", 8, department));
+
         // seed academic titles
-        AcademicTitle academicTitle1 = new AcademicTitle();
-        AcademicTitle academicTitle2 = new AcademicTitle();
-
-        academicTitle1.setTitle("Academic title 1");
-        academicTitle2.setTitle("Academic title 2");
-
-        _academicTitleRepository.save(academicTitle1);
-        _academicTitleRepository.save(academicTitle2);
+        AcademicTitle academicTitle1 = _academicTitleRepository.save(new AcademicTitle(null, "Academic title 1"));
+        AcademicTitle academicTitle2 = _academicTitleRepository.save(new AcademicTitle(null, "Academic title 2"));
 
         // seed education titles
-        EducationTitle educationTitle1 = new EducationTitle();
-        EducationTitle educationTitle2 = new EducationTitle();
-
-        educationTitle1.setTitle("Education title 1");
-        educationTitle2.setTitle("Education title 2");
-
-        _educationTitleRepository.save(educationTitle1);
-        _educationTitleRepository.save(educationTitle2);
+        EducationTitle educationTitle1 = _educationTitleRepository.save(new EducationTitle(null, "Education title 1"));
+        EducationTitle educationTitle2 = _educationTitleRepository.save(new EducationTitle(null, "Education title 2"));
 
         // seed scientific fields
-        ScientificField scientificField1 = new ScientificField();
-        ScientificField scientificField2 = new ScientificField();
+        ScientificField scientificField1 = _scientificFieldRepository.save(new ScientificField(null, "Scientific field 1"));
+        ScientificField scientificField2 = _scientificFieldRepository.save(new ScientificField(null, "Scientific field 1"));
 
-        scientificField1.setField("Scientific field 1");
-        scientificField2.setField("Scientific field 2");
+        // seed members
+        Member member1 = _memberRepository.save(new Member(null, "John", "Doe", department,
+                academicTitle1, educationTitle1, scientificField1));
+        Member member2 = _memberRepository.save(new Member(null, "Angel", "Higgins", department,
+                academicTitle2, educationTitle2, scientificField2));
 
-        _scientificFieldRepository.save(scientificField1);
-        _scientificFieldRepository.save(scientificField2);
+        // seed academic title history
+        Date currentDate = new Date();
 
-//        // seed members
-//        Member member1 = new Member();
-//        Member member2 = new Member();
-//
-//        member1.setFirstName("John");
-//        member1.setLastName("Doe");
-//        member1.setAcademicTitle(academicTitle1);
-//        member1.setEducationTitle(educationTitle1);
-//        member1.setScientificField(scientificField1);
-//
-//        member2.setFirstName("Angel");
-//        member2.setLastName("Higgins");
-//        member2.setAcademicTitle(academicTitle2);
-//        member2.setEducationTitle(educationTitle2);
-//        member2.setScientificField(scientificField2);
-//
-//        // seed department
-//        Department department = new Department();
-//
-//        department.setName("Department 1");
-//        department.setShortName("Dept 1");
-//        department.setCurrentManager(member1);
-//        department.setCurrentSecretary(member2);
-//
-//        member1.setDepartment(department);
-//        member2.setDepartment(department);
-//
-//        _memberRepository.save(member1);
-//        _memberRepository.save(member2);
-//
-//        _departmentRepository.save(department);
+        _academicTitleHistoryRepository.save(new AcademicTitleHistory(null, currentDate, null,
+                member1, academicTitle1, scientificField1));
+        _academicTitleHistoryRepository.save(new AcademicTitleHistory(null, currentDate, null,
+                member2, academicTitle2, scientificField2));
+
+        // set department's manager and secretary
+
+        department.setCurrentManager(member1);
+        department.setCurrentSecretary(member2);
+
+        _departmentRepository.save(department);
+
+        // seed department manager history
+        _departmentManagerHistoryRepository.save(new DepartmentManagerHistory(null, member1, department,
+                currentDate, null));
+
+        // seed department secretary history
+        _departmentSecretaryHistoryRepository.save(new DepartmentSecretaryHistory(null, member2, department,
+                currentDate, null));
     }
 }

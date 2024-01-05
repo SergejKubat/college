@@ -1,14 +1,11 @@
 package com.fon.college.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
 
 import java.util.Date;
 
 @Entity
-@Table(name = "secretary_history")
+@Table(name = "department_secretary_history")
 public class DepartmentSecretaryHistory {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -16,14 +13,10 @@ public class DepartmentSecretaryHistory {
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "department_id", nullable = false)
-    @OnDelete(action = OnDeleteAction.CASCADE)
-    @JsonIgnore
     private Department department;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "secretary_id", nullable = false)
-    @OnDelete(action = OnDeleteAction.CASCADE)
-    @JsonIgnore
+    @JoinColumn(name = "member_id", nullable = false)
     private Member secretary;
 
     @Column(name = "start_date")

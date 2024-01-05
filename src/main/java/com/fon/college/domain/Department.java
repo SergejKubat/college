@@ -1,8 +1,9 @@
 package com.fon.college.domain;
 
-import jakarta.persistence.*;
-
+import java.util.HashSet;
 import java.util.Set;
+
+import jakarta.persistence.*;
 
 @Entity
 @Table(name = "department")
@@ -26,38 +27,24 @@ public class Department {
     private Member currentSecretary;
 
     @OneToMany(mappedBy = "department", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<Subject> subjects;
+    private final Set<Subject> subjects = new HashSet<>();
 
     @OneToMany(mappedBy = "department", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<Member> members;
+    private final Set<Member> members = new HashSet<>();
 
     @OneToMany(mappedBy = "department", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<DepartmentManagerHistory> managerHistories;
+    private final Set<DepartmentManagerHistory> managerHistories = new HashSet<>();
 
     @OneToMany(mappedBy = "department", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<DepartmentSecretaryHistory> secretaryHistories;
+    private final Set<DepartmentSecretaryHistory> secretaryHistories = new HashSet<>();
 
     public Department() {
     }
 
-    public Department(Long id,
-                      String name,
-                      String shortName,
-                      Member currentManager,
-                      Member currentSecretary,
-                      Set<Subject> subjects,
-                      Set<Member> members,
-                      Set<DepartmentManagerHistory> managerHistories,
-                      Set<DepartmentSecretaryHistory> secretaryHistories) {
+    public Department(Long id, String name, String shortName) {
         this.id = id;
         this.name = name;
         this.shortName = shortName;
-        this.currentManager = currentManager;
-        this.currentSecretary = currentSecretary;
-        this.subjects = subjects;
-        this.members = members;
-        this.managerHistories = managerHistories;
-        this.secretaryHistories = secretaryHistories;
     }
 
     public Long getId() {
@@ -105,7 +92,7 @@ public class Department {
     }
 
     public void setSubjects(Set<Subject> subjects) {
-        this.subjects = subjects;
+        this.subjects.addAll(subjects);
     }
 
     public Set<Member> getMembers() {
@@ -113,7 +100,7 @@ public class Department {
     }
 
     public void setMembers(Set<Member> members) {
-        this.members = members;
+        this.members.addAll(members);
     }
 
     public Set<DepartmentManagerHistory> getManagerHistories() {
@@ -121,7 +108,7 @@ public class Department {
     }
 
     public void setManagerHistories(Set<DepartmentManagerHistory> managerHistories) {
-        this.managerHistories = managerHistories;
+        this.managerHistories.addAll(managerHistories);
     }
 
     public Set<DepartmentSecretaryHistory> getSecretaryHistories() {
@@ -129,6 +116,6 @@ public class Department {
     }
 
     public void setSecretaryHistories(Set<DepartmentSecretaryHistory> secretaryHistories) {
-        this.secretaryHistories = secretaryHistories;
+        this.secretaryHistories.addAll(secretaryHistories);
     }
 }
