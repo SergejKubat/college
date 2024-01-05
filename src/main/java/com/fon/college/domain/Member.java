@@ -34,19 +34,19 @@ public class Member {
     @JoinColumn(name = "scientific_field_id", nullable = false)
     private ScientificField scientificField;
 
-    @OneToOne(mappedBy = "currentManager")
+    @OneToOne(mappedBy = "currentManager", fetch = FetchType.LAZY)
     private Department managerDepartment;
 
-    @OneToOne(mappedBy = "currentSecretary")
+    @OneToOne(mappedBy = "currentSecretary", fetch = FetchType.LAZY)
     private Department secretaryDepartment;
 
-    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
     private final Set<AcademicTitleHistory> academicTitleHistories = new HashSet<>();
 
-    @OneToMany(mappedBy = "manager", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "manager", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
     private final Set<DepartmentManagerHistory> managerHistories = new HashSet<>();
 
-    @OneToMany(mappedBy = "secretary", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "secretary", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
     private final Set<DepartmentSecretaryHistory> secretaryHistories = new HashSet<>();
 
     public Member() {

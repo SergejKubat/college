@@ -15,10 +15,10 @@ public class AcademicTitle {
     @Column(name = "title", length = 100)
     private String title;
 
-    @OneToMany(mappedBy = "academicTitle", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "academicTitle", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
     private final Set<Member> members = new HashSet<>();
 
-    @OneToMany(mappedBy = "academicTitle", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "academicTitle", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
     private final Set<AcademicTitleHistory> academicTitleHistories = new HashSet<>();
 
     public AcademicTitle() {

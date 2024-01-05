@@ -15,10 +15,10 @@ public class ScientificField {
     @Column(name = "field", length = 100)
     private String field;
 
-    @OneToMany(mappedBy = "scientificField", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "scientificField", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
     private final Set<Member> members = new HashSet<>();
 
-    @OneToMany(mappedBy = "scientificField", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "scientificField", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
     private final Set<AcademicTitleHistory> academicTitleHistories = new HashSet<>();
 
     public ScientificField() {

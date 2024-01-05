@@ -15,7 +15,7 @@ public class EducationTitle {
     @Column(name = "title", length = 100)
     private String title;
 
-    @OneToMany(mappedBy = "educationTitle", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "educationTitle", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
     private final Set<Member> members = new HashSet<>();
 
     public EducationTitle() {
