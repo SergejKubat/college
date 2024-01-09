@@ -4,6 +4,11 @@ import com.fon.college.domain.AcademicTitleHistory;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public interface AcademicTitleHistoryRepository extends JpaRepository<AcademicTitleHistory, Long> {
+
+    List<AcademicTitleHistory> findAllByMemberId(long memberId);
+
 }

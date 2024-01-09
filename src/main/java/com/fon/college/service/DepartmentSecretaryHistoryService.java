@@ -12,6 +12,4 @@ public interface DepartmentSecretaryHistoryService {
     List<DepartmentSecretaryHistoryDto> getAllByMemeberId(long memberId);
 
     DepartmentSecretaryHistoryDto getById(long id);
-
-    DepartmentSecretaryHistoryDto create(DepartmentSecretaryHistoryDto departmentSecretaryHistoryDto);
 }

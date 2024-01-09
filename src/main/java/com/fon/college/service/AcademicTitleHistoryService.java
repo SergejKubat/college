@@ -7,9 +7,7 @@ import java.util.List;
 public interface AcademicTitleHistoryService {
     List<AcademicTitleHistoryDto> getAll();
 
-    List<AcademicTitleHistoryDto> getByMemberId(long memberId);
+    List<AcademicTitleHistoryDto> getAllByMemberId(long memberId);
 
     AcademicTitleHistoryDto getById(long id);
-
-    AcademicTitleHistoryDto create(AcademicTitleHistoryDto academicTitleHistoryDto);
 }
