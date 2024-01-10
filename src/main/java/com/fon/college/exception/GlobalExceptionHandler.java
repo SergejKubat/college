@@ -32,12 +32,12 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler(BadRequestException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public ResponseEntity<ErrorDetailsDto> handleBadRequestException(ResourceNotFoundException exception,
+    public ResponseEntity<ErrorDetailsDto> handleBadRequestException(BadRequestException exception,
                                                                            WebRequest webRequest) {
         ErrorDetailsDto errorDetails = new ErrorDetailsDto(exception.getMessage(),
                 webRequest.getDescription(false), new Date());
 
-        return new ResponseEntity<>(errorDetails, HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>(errorDetails, HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler(Exception.class)

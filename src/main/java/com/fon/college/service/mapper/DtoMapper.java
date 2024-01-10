@@ -11,8 +11,15 @@ public class DtoMapper {
         DepartmentDto departmentDto = new DepartmentDto();
 
         departmentDto.setId(department.getId());
-        departmentDto.setCurrentManagerId(department.getCurrentManager().getId());
-        departmentDto.setCurrentSecretaryId(department.getCurrentSecretary().getId());
+
+        if (department.getCurrentManager() != null) {
+            departmentDto.setCurrentManagerId(department.getCurrentManager().getId());
+        }
+
+        if (department.getCurrentSecretary() != null) {
+            departmentDto.setCurrentSecretaryId(department.getCurrentSecretary().getId());
+        }
+
         departmentDto.setName(department.getName());
         departmentDto.setShortName(department.getShortName());
 

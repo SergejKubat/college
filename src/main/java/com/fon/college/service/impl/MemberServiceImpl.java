@@ -122,7 +122,7 @@ public class MemberServiceImpl implements MemberService {
 
         Member updatedMember = memberRepository.save(member);
 
-        // if academic title changed, create new academic title history entry and update old
+        // if academic title is changed, create new academic title history entry and update old
         if (isAcademicTitleChanged) {
             AcademicTitleHistory oldAcademicTitleHistory = academicTitleHistoryRepository.findPreviousEntry(member.getId());
 

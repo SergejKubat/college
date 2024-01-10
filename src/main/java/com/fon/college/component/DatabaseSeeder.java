@@ -76,7 +76,6 @@ public class DatabaseSeeder implements CommandLineRunner {
                 scientificField2, currentDate, null));
 
         // set department's manager and secretary
-
         department.setCurrentManager(member1);
         department.setCurrentSecretary(member2);
 

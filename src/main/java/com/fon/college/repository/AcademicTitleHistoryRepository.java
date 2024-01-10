@@ -14,7 +14,7 @@ public interface AcademicTitleHistoryRepository extends JpaRepository<AcademicTi
     List<AcademicTitleHistory> findAllByMemberId(long memberId);
 
     @Query(value = "SELECT id, member_id, academic_title_id, scientific_field_id, start_date, end_date FROM " +
-            "academic_title_history WHERE member_id = :id AND end_date IS NULL;", nativeQuery = true)
-    AcademicTitleHistory findPreviousEntry(@Param("id") long memberId);
+            "academic_title_history WHERE member_id = :memberId AND end_date IS NULL;", nativeQuery = true)
+    AcademicTitleHistory findPreviousEntry(@Param("memberId") long memberId);
 
 }
