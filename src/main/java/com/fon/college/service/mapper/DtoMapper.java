@@ -6,10 +6,13 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class DtoMapper {
+
     public DepartmentDto mapToDepartmentDto(Department department) {
         DepartmentDto departmentDto = new DepartmentDto();
 
         departmentDto.setId(department.getId());
+        departmentDto.setCurrentManagerId(department.getCurrentManager().getId());
+        departmentDto.setCurrentSecretaryId(department.getCurrentSecretary().getId());
         departmentDto.setName(department.getName());
         departmentDto.setShortName(department.getShortName());
 
@@ -20,6 +23,7 @@ public class DtoMapper {
         SubjectDto subjectDto = new SubjectDto();
 
         subjectDto.setId(subject.getId());
+        subjectDto.setDepartmentId(subject.getDepartment().getId());
         subjectDto.setName(subject.getName());
         subjectDto.setEspb(subject.getEspb());
 
@@ -30,6 +34,10 @@ public class DtoMapper {
         MemberDto memberDto = new MemberDto();
 
         memberDto.setId(member.getId());
+        memberDto.setDepartmentId(member.getDepartment().getId());
+        memberDto.setAcademicTitleId(member.getAcademicTitle().getId());
+        memberDto.setEducationTitleId(member.getEducationTitle().getId());
+        memberDto.setScientificField(member.getScientificField().getId());
         memberDto.setFirstName(member.getFirstName());
         memberDto.setLastName(member.getLastName());
 
@@ -67,6 +75,9 @@ public class DtoMapper {
         AcademicTitleHistoryDto academicTitleHistoryDto = new AcademicTitleHistoryDto();
 
         academicTitleHistoryDto.setId(academicTitleHistory.getId());
+        academicTitleHistoryDto.setMemberId(academicTitleHistory.getMember().getId());
+        academicTitleHistoryDto.setAcademicTitleId(academicTitleHistory.getAcademicTitle().getId());
+        academicTitleHistoryDto.setScientificFieldId(academicTitleHistory.getScientificField().getId());
         academicTitleHistoryDto.setStartDate(academicTitleHistory.getStartDate());
         academicTitleHistoryDto.setEndDate(academicTitleHistory.getEndDate());
 
@@ -77,6 +88,8 @@ public class DtoMapper {
         DepartmentManagerHistoryDto departmentManagerHistoryDto = new DepartmentManagerHistoryDto();
 
         departmentManagerHistoryDto.setId(departmentManagerHistory.getId());
+        departmentManagerHistoryDto.setDepartmentId(departmentManagerHistory.getDepartment().getId());
+        departmentManagerHistoryDto.setManagerId(departmentManagerHistory.getManager().getId());
         departmentManagerHistoryDto.setStartDate(departmentManagerHistory.getStartDate());
         departmentManagerHistoryDto.setEndDate(departmentManagerHistory.getEndDate());
 
@@ -87,9 +100,12 @@ public class DtoMapper {
         DepartmentSecretaryHistoryDto departmentSecretaryHistoryDto = new DepartmentSecretaryHistoryDto();
 
         departmentSecretaryHistoryDto.setId(departmentSecretaryHistory.getId());
+        departmentSecretaryHistoryDto.setDepartmentId(departmentSecretaryHistory.getDepartment().getId());
+        departmentSecretaryHistoryDto.setSecretaryId(departmentSecretaryHistory.getSecretary().getId());
         departmentSecretaryHistoryDto.setStartDate(departmentSecretaryHistory.getStartDate());
         departmentSecretaryHistoryDto.setEndDate(departmentSecretaryHistory.getEndDate());
 
         return departmentSecretaryHistoryDto;
     }
+
 }

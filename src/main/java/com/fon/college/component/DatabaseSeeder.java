@@ -70,10 +70,10 @@ public class DatabaseSeeder implements CommandLineRunner {
         // seed academic title history
         Date currentDate = new Date();
 
-        _academicTitleHistoryRepository.save(new AcademicTitleHistory(null, currentDate, null,
-                member1, academicTitle1, scientificField1));
-        _academicTitleHistoryRepository.save(new AcademicTitleHistory(null, currentDate, null,
-                member2, academicTitle2, scientificField2));
+        _academicTitleHistoryRepository.save(new AcademicTitleHistory(null, member1, academicTitle1,
+                scientificField1, currentDate, null));
+        _academicTitleHistoryRepository.save(new AcademicTitleHistory(null, member2, academicTitle2,
+                scientificField2, currentDate, null));
 
         // set department's manager and secretary
 

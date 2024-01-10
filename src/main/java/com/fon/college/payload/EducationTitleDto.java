@@ -6,8 +6,11 @@ import lombok.Data;
 
 @Data
 public class EducationTitleDto {
+
     private long id;
+
     @NotEmpty
     @Size(max = 100)
     private String title;
+
 }

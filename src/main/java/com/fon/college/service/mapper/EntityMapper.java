@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class EntityMapper {
+
     public Department mapToDepartmentEntity(DepartmentDto departmentDto) {
         Department department = new Department();
 
@@ -83,4 +84,5 @@ public class EntityMapper {
 
         return departmentSecretaryHistory;
     }
+
 }

@@ -6,11 +6,23 @@ import lombok.Data;
 
 @Data
 public class MemberDto {
+
     private long id;
+
+    private long departmentId;
+
+    private long academicTitleId;
+
+    private long educationTitleId;
+
+    private long scientificField;
+
     @NotEmpty
     @Size(max = 100)
     private String firstName;
+
     @NotEmpty
     @Size(max = 100)
     private String lastName;
+
 }
