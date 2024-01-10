@@ -28,7 +28,7 @@ public class ScientificFieldController {
         return new ResponseEntity<>(scientificFieldService.getById(id), HttpStatus.OK);
     }
 
-    @PostMapping("")
+    @PostMapping("/")
     public ResponseEntity<ScientificFieldDto> create(@RequestBody ScientificFieldDto departmentDto) {
         return new ResponseEntity<>(scientificFieldService.create(departmentDto), HttpStatus.CREATED);
     }
@@ -45,4 +45,5 @@ public class ScientificFieldController {
 
         return new ResponseEntity<>("Scientific field successfully deleted.", HttpStatus.OK);
     }
+
 }

@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/department-secretary-histories")
+@RequestMapping("/api")
 public class DepartmentSecretaryHistoryController {
 
     private final DepartmentSecretaryHistoryService departmentSecretaryHistoryService;
@@ -21,12 +21,24 @@ public class DepartmentSecretaryHistoryController {
         this.departmentSecretaryHistoryService = departmentSecretaryHistoryService;
     }
 
-    @GetMapping("/")
+    @GetMapping("/department-secretary-histories")
     public ResponseEntity<List<DepartmentSecretaryHistoryDto>> getAll() {
         return new ResponseEntity<>(departmentSecretaryHistoryService.getAll(), HttpStatus.OK);
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/departments/{departmentId}/department-secretary-histories")
+    public ResponseEntity<List<DepartmentSecretaryHistoryDto>> getAllByDepartmentId(
+            @PathVariable(value = "departmentId") long departmentId) {
+        return new ResponseEntity<>(departmentSecretaryHistoryService.getAllByDepartmentId(departmentId), HttpStatus.OK);
+    }
+
+    @GetMapping("/members/{memberId}/department-secretary-histories")
+    public ResponseEntity<List<DepartmentSecretaryHistoryDto>> getAllBySecretayId(
+            @PathVariable(value = "memberId") long memberId) {
+        return new ResponseEntity<>(departmentSecretaryHistoryService.getAllByMemeberId(memberId), HttpStatus.OK);
+    }
+
+    @GetMapping("/department-secretary-histories/{id}")
     public ResponseEntity<DepartmentSecretaryHistoryDto> getById(@PathVariable(value = "id") long id) {
         return new ResponseEntity<>(departmentSecretaryHistoryService.getById(id), HttpStatus.OK);
     }

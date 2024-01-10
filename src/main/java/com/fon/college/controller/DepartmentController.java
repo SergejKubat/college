@@ -27,7 +27,7 @@ public class DepartmentController {
         return new ResponseEntity<>(departmentService.getById(id), HttpStatus.OK);
     }
 
-    @PostMapping("")
+    @PostMapping("/")
     public ResponseEntity<DepartmentDto> create(@RequestBody DepartmentDto departmentDto) {
         return new ResponseEntity<>(departmentService.create(departmentDto), HttpStatus.CREATED);
     }
@@ -44,4 +44,5 @@ public class DepartmentController {
 
         return new ResponseEntity<>("Department successfully deleted.", HttpStatus.OK);
     }
+
 }

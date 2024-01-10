@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/academic-title-histories")
+@RequestMapping("/api")
 public class AcademicTitleHistoryController {
 
     private final AcademicTitleHistoryService academicTitleHistoryService;
@@ -21,13 +21,19 @@ public class AcademicTitleHistoryController {
         this.academicTitleHistoryService = academicTitleHistoryService;
     }
 
-    @GetMapping("/")
+    @GetMapping("/academic-title-histories")
     public ResponseEntity<List<AcademicTitleHistoryDto>> getAll() {
         return new ResponseEntity<>(academicTitleHistoryService.getAll(), HttpStatus.OK);
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/members/{memberId}/academic-title-histories")
+    public ResponseEntity<List<AcademicTitleHistoryDto>> getAllByMemberId(@PathVariable(value = "memberId") long memberId) {
+        return new ResponseEntity<>(academicTitleHistoryService.getAllByMemberId(memberId), HttpStatus.OK);
+    }
+
+    @GetMapping("/academic-title-histories/{id}")
     public ResponseEntity<AcademicTitleHistoryDto> getById(@PathVariable(value = "id") long id) {
         return new ResponseEntity<>(academicTitleHistoryService.getById(id), HttpStatus.OK);
     }
+
 }

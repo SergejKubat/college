@@ -28,7 +28,7 @@ public class AcademicTitleController {
         return new ResponseEntity<>(academicTitleService.getById(id), HttpStatus.OK);
     }
 
-    @PostMapping("")
+    @PostMapping("/")
     public ResponseEntity<AcademicTitleDto> create(@RequestBody AcademicTitleDto departmentDto) {
         return new ResponseEntity<>(academicTitleService.create(departmentDto), HttpStatus.CREATED);
     }
@@ -45,4 +45,5 @@ public class AcademicTitleController {
 
         return new ResponseEntity<>("Academic title successfully deleted.", HttpStatus.OK);
     }
+
 }
