@@ -15,7 +15,7 @@ public class MemberDto {
 
     private long educationTitleId;
 
-    private long scientificField;
+    private long scientificFieldId;
 
     @NotEmpty
     @Size(max = 100)

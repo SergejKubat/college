@@ -37,7 +37,7 @@ public class DtoMapper {
         memberDto.setDepartmentId(member.getDepartment().getId());
         memberDto.setAcademicTitleId(member.getAcademicTitle().getId());
         memberDto.setEducationTitleId(member.getEducationTitle().getId());
-        memberDto.setScientificField(member.getScientificField().getId());
+        memberDto.setScientificFieldId(member.getScientificField().getId());
         memberDto.setFirstName(member.getFirstName());
         memberDto.setLastName(member.getLastName());
 
