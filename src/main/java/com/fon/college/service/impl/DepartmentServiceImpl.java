@@ -85,7 +85,7 @@ public class DepartmentServiceImpl implements DepartmentService {
                 Member member = memberRepository.findById(departmentDto.getCurrentManagerId()).orElseThrow(
                         () -> new ResourceNotFoundException("Member", "id", String.valueOf(departmentDto.getCurrentManagerId())));
 
-                // check if member is not in department
+                // check if member is in department
                 if (!Objects.equals(department.getId(), member.getDepartment().getId())) {
                     throw new BadRequestException("Member with id: "
                             + member.getId() + " is not in department with id: " + department.getId());
@@ -130,7 +130,7 @@ public class DepartmentServiceImpl implements DepartmentService {
                 Member member = memberRepository.findById(departmentDto.getCurrentSecretaryId()).orElseThrow(
                         () -> new ResourceNotFoundException("Member", "id", String.valueOf(departmentDto.getCurrentSecretaryId())));
 
-                // check if member is not in department
+                // check if member is in department
                 if (!Objects.equals(department.getId(), member.getDepartment().getId())) {
                     throw new BadRequestException("Member with id: "
                             + member.getId() + " is not in department with id: " + department.getId());

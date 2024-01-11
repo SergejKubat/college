@@ -15,7 +15,7 @@ public class Department {
     @Column(name = "name", length = 200)
     private String name;
 
-    @Column(name = "short_name", unique = true, length = 50)
+    @Column(name = "short_name", length = 50)
     private String shortName;
 
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)

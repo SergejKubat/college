@@ -91,7 +91,9 @@ Run the application:
 mvn spring-boot:run
 ```
 
-The application will start on http://localhost:8080.
+The application will start on: http://localhost:8080.
+
+H2 Console (for development) will start on: http://localhost:8080/h2-console.
 
 ## Endpoints
 
