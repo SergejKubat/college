@@ -30,16 +30,16 @@ public class DepartmentSecretaryHistoryController {
     }
 
     @Operation(summary = "Retrieve all DepartmentSecretaryHistory entities.")
-    @ApiResponse(responseCode = "200", content = { @Content(schema = @Schema(implementation = DepartmentSecretaryHistoryDto.class),
-            mediaType = "application/json") })
+    @ApiResponse(responseCode = "200", content = {@Content(schema = @Schema(implementation = DepartmentSecretaryHistoryDto.class),
+            mediaType = "application/json")})
     @GetMapping("/department-secretary-histories")
     public ResponseEntity<List<DepartmentSecretaryHistoryDto>> getAll() {
         return new ResponseEntity<>(departmentSecretaryHistoryService.getAll(), HttpStatus.OK);
     }
 
     @Operation(summary = "Retrieve all DepartmentSecretaryHistory entities by Department id.")
-    @ApiResponse(responseCode = "200", content = { @Content(schema = @Schema(implementation = DepartmentSecretaryHistoryDto.class),
-            mediaType = "application/json") })
+    @ApiResponse(responseCode = "200", content = {@Content(schema = @Schema(implementation = DepartmentSecretaryHistoryDto.class),
+            mediaType = "application/json")})
     @GetMapping("/departments/{departmentId}/department-secretary-histories")
     public ResponseEntity<List<DepartmentSecretaryHistoryDto>> getAllByDepartmentId(
             @PathVariable(value = "departmentId") long departmentId) {
@@ -47,8 +47,8 @@ public class DepartmentSecretaryHistoryController {
     }
 
     @Operation(summary = "Retrieve all DepartmentSecretaryHistory entities by Member id.")
-    @ApiResponse(responseCode = "200", content = { @Content(schema = @Schema(implementation = DepartmentSecretaryHistoryDto.class),
-            mediaType = "application/json") })
+    @ApiResponse(responseCode = "200", content = {@Content(schema = @Schema(implementation = DepartmentSecretaryHistoryDto.class),
+            mediaType = "application/json")})
     @GetMapping("/members/{memberId}/department-secretary-histories")
     public ResponseEntity<List<DepartmentSecretaryHistoryDto>> getAllBySecretayId(
             @PathVariable(value = "memberId") long memberId) {
@@ -57,10 +57,10 @@ public class DepartmentSecretaryHistoryController {
 
     @Operation(summary = "Retrieve DepartmentSecretaryHistory entity by id.")
     @ApiResponses({
-            @ApiResponse(responseCode = "200", content = { @Content(schema = @Schema(implementation = DepartmentSecretaryHistoryDto.class),
-                    mediaType = "application/json") }),
-            @ApiResponse(responseCode = "404", content = { @Content(schema = @Schema(implementation = ErrorDetailsDto.class),
-                    mediaType = "application/json") })
+            @ApiResponse(responseCode = "200", content = {@Content(schema = @Schema(implementation = DepartmentSecretaryHistoryDto.class),
+                    mediaType = "application/json")}),
+            @ApiResponse(responseCode = "404", content = {@Content(schema = @Schema(implementation = ErrorDetailsDto.class),
+                    mediaType = "application/json")})
     })
     @GetMapping("/department-secretary-histories/{id}")
     public ResponseEntity<DepartmentSecretaryHistoryDto> getById(@PathVariable(value = "id") long id) {

@@ -30,7 +30,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler(BadRequestException.class)
     public ResponseEntity<ErrorDetailsDto> handleBadRequestException(BadRequestException exception,
-                                                                           WebRequest webRequest) {
+                                                                     WebRequest webRequest) {
         ErrorDetailsDto errorDetails = new ErrorDetailsDto(exception.getMessage(),
                 webRequest.getDescription(false), new Date());
 
@@ -39,7 +39,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ErrorDetailsDto> handleGlobalException(Exception exception,
-                                                              WebRequest webRequest) {
+                                                                 WebRequest webRequest) {
         ErrorDetailsDto errorDetails = new ErrorDetailsDto(exception.getMessage(),
                 webRequest.getDescription(false), new Date());
 

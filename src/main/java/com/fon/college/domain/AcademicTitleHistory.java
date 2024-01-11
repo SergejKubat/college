@@ -1,8 +1,8 @@
 package com.fon.college.domain;
 
-import java.util.Date;
-
 import jakarta.persistence.*;
+
+import java.util.Date;
 
 @Entity
 @Table(name = "academic_title_history")

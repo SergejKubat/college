@@ -18,7 +18,7 @@ public class DepartmentSecretaryHistoryServiceImpl implements DepartmentSecretar
     private final DepartmentSecretaryHistoryRepository departmentSecretaryHistoryRepository;
 
     public DepartmentSecretaryHistoryServiceImpl(DtoMapper dtoMapper,
-                                               DepartmentSecretaryHistoryRepository departmentSecretaryHistoryRepository) {
+                                                 DepartmentSecretaryHistoryRepository departmentSecretaryHistoryRepository) {
         this.dtoMapper = dtoMapper;
         this.departmentSecretaryHistoryRepository = departmentSecretaryHistoryRepository;
     }

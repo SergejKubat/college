@@ -1,53 +1,42 @@
 package com.fon.college.domain;
 
+import jakarta.persistence.*;
+
 import java.util.HashSet;
 import java.util.Set;
-
-import jakarta.persistence.*;
 
 @Entity
 @Table(name = "member")
 public class Member {
+    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
+    private final Set<AcademicTitleHistory> academicTitleHistories = new HashSet<>();
+    @OneToMany(mappedBy = "manager", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
+    private final Set<DepartmentManagerHistory> managerHistories = new HashSet<>();
+    @OneToMany(mappedBy = "secretary", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
+    private final Set<DepartmentSecretaryHistory> secretaryHistories = new HashSet<>();
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     @Column(name = "first_name", length = 100)
     private String firstName;
-
     @Column(name = "last_name", length = 100)
     private String lastName;
-
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "department_id", nullable = false)
     private Department department;
-
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "academic_title_id", nullable = false)
     private AcademicTitle academicTitle;
-
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "education_title_id", nullable = false)
     private EducationTitle educationTitle;
-
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "scientific_field_id", nullable = false)
     private ScientificField scientificField;
-
     @OneToOne(mappedBy = "currentManager", fetch = FetchType.LAZY)
     private Department managerDepartment;
-
     @OneToOne(mappedBy = "currentSecretary", fetch = FetchType.LAZY)
     private Department secretaryDepartment;
-
-    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
-    private final Set<AcademicTitleHistory> academicTitleHistories = new HashSet<>();
-
-    @OneToMany(mappedBy = "manager", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
-    private final Set<DepartmentManagerHistory> managerHistories = new HashSet<>();
-
-    @OneToMany(mappedBy = "secretary", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
-    private final Set<DepartmentSecretaryHistory> secretaryHistories = new HashSet<>();
 
     public Member() {
     }

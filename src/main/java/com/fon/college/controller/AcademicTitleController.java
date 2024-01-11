@@ -27,8 +27,8 @@ public class AcademicTitleController {
     }
 
     @Operation(summary = "Retrieve all AcademicTitle entities.")
-    @ApiResponse(responseCode = "200", content = { @Content(schema = @Schema(implementation = AcademicTitleDto.class),
-            mediaType = "application/json") })
+    @ApiResponse(responseCode = "200", content = {@Content(schema = @Schema(implementation = AcademicTitleDto.class),
+            mediaType = "application/json")})
     @GetMapping("/")
     public ResponseEntity<List<AcademicTitleDto>> getAll() {
         return new ResponseEntity<>(academicTitleService.getAll(), HttpStatus.OK);
@@ -36,10 +36,10 @@ public class AcademicTitleController {
 
     @Operation(summary = "Retrieve AcademicTitle entity by id.")
     @ApiResponses({
-            @ApiResponse(responseCode = "200", content = { @Content(schema = @Schema(implementation = AcademicTitleDto.class),
-                    mediaType = "application/json") }),
-            @ApiResponse(responseCode = "404", content = { @Content(schema = @Schema(implementation = ErrorDetailsDto.class),
-                    mediaType = "application/json") })
+            @ApiResponse(responseCode = "200", content = {@Content(schema = @Schema(implementation = AcademicTitleDto.class),
+                    mediaType = "application/json")}),
+            @ApiResponse(responseCode = "404", content = {@Content(schema = @Schema(implementation = ErrorDetailsDto.class),
+                    mediaType = "application/json")})
     })
     @GetMapping("/{id}")
     public ResponseEntity<AcademicTitleDto> getById(@PathVariable(value = "id") long id) {
@@ -48,10 +48,10 @@ public class AcademicTitleController {
 
     @Operation(summary = "Create new AcademicTitle entity.")
     @ApiResponses({
-            @ApiResponse(responseCode = "201", content = { @Content(schema = @Schema(implementation = AcademicTitleDto.class),
-                    mediaType = "application/json") }),
-            @ApiResponse(responseCode = "400", content = { @Content(schema = @Schema(implementation = ErrorDetailsDto.class),
-                    mediaType = "application/json") })
+            @ApiResponse(responseCode = "201", content = {@Content(schema = @Schema(implementation = AcademicTitleDto.class),
+                    mediaType = "application/json")}),
+            @ApiResponse(responseCode = "400", content = {@Content(schema = @Schema(implementation = ErrorDetailsDto.class),
+                    mediaType = "application/json")})
     })
     @PostMapping("/")
     public ResponseEntity<AcademicTitleDto> create(@RequestBody AcademicTitleDto departmentDto) {
@@ -60,24 +60,24 @@ public class AcademicTitleController {
 
     @Operation(summary = "Update AcademicTitle entity by id.")
     @ApiResponses({
-            @ApiResponse(responseCode = "200", content = { @Content(schema = @Schema(implementation = AcademicTitleDto.class),
-                    mediaType = "application/json") }),
-            @ApiResponse(responseCode = "400", content = { @Content(schema = @Schema(implementation = ErrorDetailsDto.class),
-                    mediaType = "application/json") }),
-            @ApiResponse(responseCode = "404", content = { @Content(schema = @Schema(implementation = ErrorDetailsDto.class),
-                    mediaType = "application/json") })
+            @ApiResponse(responseCode = "200", content = {@Content(schema = @Schema(implementation = AcademicTitleDto.class),
+                    mediaType = "application/json")}),
+            @ApiResponse(responseCode = "400", content = {@Content(schema = @Schema(implementation = ErrorDetailsDto.class),
+                    mediaType = "application/json")}),
+            @ApiResponse(responseCode = "404", content = {@Content(schema = @Schema(implementation = ErrorDetailsDto.class),
+                    mediaType = "application/json")})
     })
     @PutMapping("/{id}")
     public ResponseEntity<AcademicTitleDto> update(@PathVariable(value = "id") long id,
-                                                @RequestBody AcademicTitleDto departmentDto) {
+                                                   @RequestBody AcademicTitleDto departmentDto) {
         return new ResponseEntity<>(academicTitleService.update(id, departmentDto), HttpStatus.OK);
     }
 
     @Operation(summary = "Delete AcademicTitle entity by id.")
     @ApiResponses({
-            @ApiResponse(responseCode = "200", content = { @Content(mediaType = "text/plain") }),
-            @ApiResponse(responseCode = "404", content = { @Content(schema = @Schema(implementation = ErrorDetailsDto.class),
-                    mediaType = "application/json") })
+            @ApiResponse(responseCode = "200", content = {@Content(mediaType = "text/plain")}),
+            @ApiResponse(responseCode = "404", content = {@Content(schema = @Schema(implementation = ErrorDetailsDto.class),
+                    mediaType = "application/json")})
     })
     @DeleteMapping("/{id}")
     public ResponseEntity<String> delete(@PathVariable(value = "id") long id) {

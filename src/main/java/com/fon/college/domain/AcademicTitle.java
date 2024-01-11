@@ -1,25 +1,22 @@
 package com.fon.college.domain;
 
+import jakarta.persistence.*;
+
 import java.util.HashSet;
 import java.util.Set;
-
-import jakarta.persistence.*;
 
 @Entity
 @Table(name = "academic_title")
 public class AcademicTitle {
+    @OneToMany(mappedBy = "academicTitle", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
+    private final Set<Member> members = new HashSet<>();
+    @OneToMany(mappedBy = "academicTitle", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
+    private final Set<AcademicTitleHistory> academicTitleHistories = new HashSet<>();
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     @Column(name = "title", length = 100)
     private String title;
-
-    @OneToMany(mappedBy = "academicTitle", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
-    private final Set<Member> members = new HashSet<>();
-
-    @OneToMany(mappedBy = "academicTitle", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
-    private final Set<AcademicTitleHistory> academicTitleHistories = new HashSet<>();
 
     public AcademicTitle() {
     }

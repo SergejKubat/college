@@ -30,16 +30,16 @@ public class AcademicTitleHistoryController {
     }
 
     @Operation(summary = "Retrieve all AcademicTitleHistory entities.")
-    @ApiResponse(responseCode = "200", content = { @Content(schema = @Schema(implementation = AcademicTitleHistoryDto.class),
-            mediaType = "application/json") })
+    @ApiResponse(responseCode = "200", content = {@Content(schema = @Schema(implementation = AcademicTitleHistoryDto.class),
+            mediaType = "application/json")})
     @GetMapping("/academic-title-histories")
     public ResponseEntity<List<AcademicTitleHistoryDto>> getAll() {
         return new ResponseEntity<>(academicTitleHistoryService.getAll(), HttpStatus.OK);
     }
 
     @Operation(summary = "Retrieve all AcademicTitleHistory entities by Member id.")
-    @ApiResponse(responseCode = "200", content = { @Content(schema = @Schema(implementation = AcademicTitleHistoryDto.class),
-            mediaType = "application/json") })
+    @ApiResponse(responseCode = "200", content = {@Content(schema = @Schema(implementation = AcademicTitleHistoryDto.class),
+            mediaType = "application/json")})
     @GetMapping("/members/{memberId}/academic-title-histories")
     public ResponseEntity<List<AcademicTitleHistoryDto>> getAllByMemberId(@PathVariable(value = "memberId") long memberId) {
         return new ResponseEntity<>(academicTitleHistoryService.getAllByMemberId(memberId), HttpStatus.OK);
@@ -47,10 +47,10 @@ public class AcademicTitleHistoryController {
 
     @Operation(summary = "Retrieve AcademicTitleHistory entity by id.")
     @ApiResponses({
-            @ApiResponse(responseCode = "200", content = { @Content(schema = @Schema(implementation = AcademicTitleHistoryDto.class),
-                    mediaType = "application/json") }),
-            @ApiResponse(responseCode = "404", content = { @Content(schema = @Schema(implementation = ErrorDetailsDto.class),
-                    mediaType = "application/json") })
+            @ApiResponse(responseCode = "200", content = {@Content(schema = @Schema(implementation = AcademicTitleHistoryDto.class),
+                    mediaType = "application/json")}),
+            @ApiResponse(responseCode = "404", content = {@Content(schema = @Schema(implementation = ErrorDetailsDto.class),
+                    mediaType = "application/json")})
     })
     @GetMapping("/academic-title-histories/{id}")
     public ResponseEntity<AcademicTitleHistoryDto> getById(@PathVariable(value = "id") long id) {

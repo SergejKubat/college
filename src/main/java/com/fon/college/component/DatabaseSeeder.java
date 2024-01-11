@@ -1,13 +1,12 @@
 package com.fon.college.component;
 
-import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
-
-import org.springframework.boot.CommandLineRunner;
-import org.springframework.stereotype.Component;
 import com.fon.college.domain.*;
 import com.fon.college.repository.*;
+import org.springframework.boot.CommandLineRunner;
+import org.springframework.stereotype.Component;
+
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 
 @Component
 public class DatabaseSeeder implements CommandLineRunner {

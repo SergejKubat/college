@@ -1,6 +1,5 @@
 package com.fon.college.controller;
 
-import com.fon.college.payload.AcademicTitleDto;
 import com.fon.college.payload.ErrorDetailsDto;
 import com.fon.college.payload.SubjectDto;
 import com.fon.college.service.SubjectService;
@@ -28,16 +27,16 @@ public class SubjectController {
     }
 
     @Operation(summary = "Retrieve all Subject entities.")
-    @ApiResponse(responseCode = "200", content = { @Content(schema = @Schema(implementation = SubjectDto.class),
-            mediaType = "application/json") })
+    @ApiResponse(responseCode = "200", content = {@Content(schema = @Schema(implementation = SubjectDto.class),
+            mediaType = "application/json")})
     @GetMapping("/subjects")
     public ResponseEntity<List<SubjectDto>> getAll() {
         return new ResponseEntity<>(subjectService.getAll(), HttpStatus.OK);
     }
 
     @Operation(summary = "Retrieve all Subject entities by Department id.")
-    @ApiResponse(responseCode = "200", content = { @Content(schema = @Schema(implementation = SubjectDto.class),
-            mediaType = "application/json") })
+    @ApiResponse(responseCode = "200", content = {@Content(schema = @Schema(implementation = SubjectDto.class),
+            mediaType = "application/json")})
     @GetMapping("/departments/{departmentId}/subjects")
     public ResponseEntity<List<SubjectDto>> getAllByDepartmentId(
             @PathVariable(value = "departmentId") long departmentId) {
@@ -46,10 +45,10 @@ public class SubjectController {
 
     @Operation(summary = "Retrieve Subject entity by id.")
     @ApiResponses({
-            @ApiResponse(responseCode = "200", content = { @Content(schema = @Schema(implementation = SubjectDto.class),
-                    mediaType = "application/json") }),
-            @ApiResponse(responseCode = "404", content = { @Content(schema = @Schema(implementation = ErrorDetailsDto.class),
-                    mediaType = "application/json") })
+            @ApiResponse(responseCode = "200", content = {@Content(schema = @Schema(implementation = SubjectDto.class),
+                    mediaType = "application/json")}),
+            @ApiResponse(responseCode = "404", content = {@Content(schema = @Schema(implementation = ErrorDetailsDto.class),
+                    mediaType = "application/json")})
     })
     @GetMapping("/subjects/{id}")
     public ResponseEntity<SubjectDto> getById(@PathVariable(value = "id") long id) {
@@ -58,12 +57,12 @@ public class SubjectController {
 
     @Operation(summary = "Create new Subject entity.")
     @ApiResponses({
-            @ApiResponse(responseCode = "201", content = { @Content(schema = @Schema(implementation = SubjectDto.class),
-                    mediaType = "application/json") }),
-            @ApiResponse(responseCode = "400", content = { @Content(schema = @Schema(implementation = ErrorDetailsDto.class),
-                    mediaType = "application/json") }),
-            @ApiResponse(responseCode = "404", content = { @Content(schema = @Schema(implementation = ErrorDetailsDto.class),
-                    mediaType = "application/json") })
+            @ApiResponse(responseCode = "201", content = {@Content(schema = @Schema(implementation = SubjectDto.class),
+                    mediaType = "application/json")}),
+            @ApiResponse(responseCode = "400", content = {@Content(schema = @Schema(implementation = ErrorDetailsDto.class),
+                    mediaType = "application/json")}),
+            @ApiResponse(responseCode = "404", content = {@Content(schema = @Schema(implementation = ErrorDetailsDto.class),
+                    mediaType = "application/json")})
     })
     @PostMapping("/subjects")
     public ResponseEntity<SubjectDto> create(@RequestBody SubjectDto departmentDto) {
@@ -72,24 +71,24 @@ public class SubjectController {
 
     @Operation(summary = "Update Subject entity by id.")
     @ApiResponses({
-            @ApiResponse(responseCode = "200", content = { @Content(schema = @Schema(implementation = SubjectDto.class),
-                    mediaType = "application/json") }),
-            @ApiResponse(responseCode = "400", content = { @Content(schema = @Schema(implementation = ErrorDetailsDto.class),
-                    mediaType = "application/json") }),
-            @ApiResponse(responseCode = "404", content = { @Content(schema = @Schema(implementation = ErrorDetailsDto.class),
-                    mediaType = "application/json") })
+            @ApiResponse(responseCode = "200", content = {@Content(schema = @Schema(implementation = SubjectDto.class),
+                    mediaType = "application/json")}),
+            @ApiResponse(responseCode = "400", content = {@Content(schema = @Schema(implementation = ErrorDetailsDto.class),
+                    mediaType = "application/json")}),
+            @ApiResponse(responseCode = "404", content = {@Content(schema = @Schema(implementation = ErrorDetailsDto.class),
+                    mediaType = "application/json")})
     })
     @PutMapping("/subjects/{id}")
     public ResponseEntity<SubjectDto> update(@PathVariable(value = "id") long id,
-                                                @RequestBody SubjectDto departmentDto) {
+                                             @RequestBody SubjectDto departmentDto) {
         return new ResponseEntity<>(subjectService.update(id, departmentDto), HttpStatus.OK);
     }
 
     @Operation(summary = "Delete Subject entity by id.")
     @ApiResponses({
-            @ApiResponse(responseCode = "200", content = { @Content(mediaType = "text/plain") }),
-            @ApiResponse(responseCode = "404", content = { @Content(schema = @Schema(implementation = ErrorDetailsDto.class),
-                    mediaType = "application/json") })
+            @ApiResponse(responseCode = "200", content = {@Content(mediaType = "text/plain")}),
+            @ApiResponse(responseCode = "404", content = {@Content(schema = @Schema(implementation = ErrorDetailsDto.class),
+                    mediaType = "application/json")})
     })
     @DeleteMapping("/subjects/{id}")
     public ResponseEntity<String> delete(@PathVariable(value = "id") long id) {

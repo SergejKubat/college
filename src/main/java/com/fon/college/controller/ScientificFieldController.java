@@ -1,7 +1,5 @@
 package com.fon.college.controller;
 
-import com.fon.college.domain.ScientificField;
-import com.fon.college.payload.AcademicTitleDto;
 import com.fon.college.payload.ErrorDetailsDto;
 import com.fon.college.payload.ScientificFieldDto;
 import com.fon.college.service.ScientificFieldService;
@@ -29,8 +27,8 @@ public class ScientificFieldController {
     }
 
     @Operation(summary = "Retrieve all ScientificField entities.")
-    @ApiResponse(responseCode = "200", content = { @Content(schema = @Schema(implementation = ScientificFieldDto.class),
-            mediaType = "application/json") })
+    @ApiResponse(responseCode = "200", content = {@Content(schema = @Schema(implementation = ScientificFieldDto.class),
+            mediaType = "application/json")})
     @GetMapping("/")
     public ResponseEntity<List<ScientificFieldDto>> getAll() {
         return new ResponseEntity<>(scientificFieldService.getAll(), HttpStatus.OK);
@@ -38,10 +36,10 @@ public class ScientificFieldController {
 
     @Operation(summary = "Retrieve ScientificField entity by id.")
     @ApiResponses({
-            @ApiResponse(responseCode = "200", content = { @Content(schema = @Schema(implementation = ScientificFieldDto.class),
-                    mediaType = "application/json") }),
-            @ApiResponse(responseCode = "404", content = { @Content(schema = @Schema(implementation = ErrorDetailsDto.class),
-                    mediaType = "application/json") })
+            @ApiResponse(responseCode = "200", content = {@Content(schema = @Schema(implementation = ScientificFieldDto.class),
+                    mediaType = "application/json")}),
+            @ApiResponse(responseCode = "404", content = {@Content(schema = @Schema(implementation = ErrorDetailsDto.class),
+                    mediaType = "application/json")})
     })
     @GetMapping("/{id}")
     public ResponseEntity<ScientificFieldDto> getById(@PathVariable(value = "id") long id) {
@@ -50,10 +48,10 @@ public class ScientificFieldController {
 
     @Operation(summary = "Create new ScientificField entity.")
     @ApiResponses({
-            @ApiResponse(responseCode = "201", content = { @Content(schema = @Schema(implementation = ScientificFieldDto.class),
-                    mediaType = "application/json") }),
-            @ApiResponse(responseCode = "400", content = { @Content(schema = @Schema(implementation = ErrorDetailsDto.class),
-                    mediaType = "application/json") })
+            @ApiResponse(responseCode = "201", content = {@Content(schema = @Schema(implementation = ScientificFieldDto.class),
+                    mediaType = "application/json")}),
+            @ApiResponse(responseCode = "400", content = {@Content(schema = @Schema(implementation = ErrorDetailsDto.class),
+                    mediaType = "application/json")})
     })
     @PostMapping("/")
     public ResponseEntity<ScientificFieldDto> create(@RequestBody ScientificFieldDto departmentDto) {
@@ -62,24 +60,24 @@ public class ScientificFieldController {
 
     @Operation(summary = "Update ScientificField entity by id.")
     @ApiResponses({
-            @ApiResponse(responseCode = "200", content = { @Content(schema = @Schema(implementation = ScientificFieldDto.class),
-                    mediaType = "application/json") }),
-            @ApiResponse(responseCode = "400", content = { @Content(schema = @Schema(implementation = ErrorDetailsDto.class),
-                    mediaType = "application/json") }),
-            @ApiResponse(responseCode = "404", content = { @Content(schema = @Schema(implementation = ErrorDetailsDto.class),
-                    mediaType = "application/json") })
+            @ApiResponse(responseCode = "200", content = {@Content(schema = @Schema(implementation = ScientificFieldDto.class),
+                    mediaType = "application/json")}),
+            @ApiResponse(responseCode = "400", content = {@Content(schema = @Schema(implementation = ErrorDetailsDto.class),
+                    mediaType = "application/json")}),
+            @ApiResponse(responseCode = "404", content = {@Content(schema = @Schema(implementation = ErrorDetailsDto.class),
+                    mediaType = "application/json")})
     })
     @PutMapping("/{id}")
     public ResponseEntity<ScientificFieldDto> update(@PathVariable(value = "id") long id,
-                                                   @RequestBody ScientificFieldDto departmentDto) {
+                                                     @RequestBody ScientificFieldDto departmentDto) {
         return new ResponseEntity<>(scientificFieldService.update(id, departmentDto), HttpStatus.OK);
     }
 
     @Operation(summary = "Delete ScientificField entity by id.")
     @ApiResponses({
-            @ApiResponse(responseCode = "200", content = { @Content(mediaType = "text/plain") }),
-            @ApiResponse(responseCode = "404", content = { @Content(schema = @Schema(implementation = ErrorDetailsDto.class),
-                    mediaType = "application/json") })
+            @ApiResponse(responseCode = "200", content = {@Content(mediaType = "text/plain")}),
+            @ApiResponse(responseCode = "404", content = {@Content(schema = @Schema(implementation = ErrorDetailsDto.class),
+                    mediaType = "application/json")})
     })
     @DeleteMapping("/{id}")
     public ResponseEntity<String> delete(@PathVariable(value = "id") long id) {

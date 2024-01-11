@@ -1,6 +1,5 @@
 package com.fon.college.controller;
 
-import com.fon.college.payload.AcademicTitleDto;
 import com.fon.college.payload.EducationTitleDto;
 import com.fon.college.payload.ErrorDetailsDto;
 import com.fon.college.service.EducationTitleService;
@@ -28,8 +27,8 @@ public class EducationTitleController {
     }
 
     @Operation(summary = "Retrieve all EducationTitle entities.")
-    @ApiResponse(responseCode = "200", content = { @Content(schema = @Schema(implementation = EducationTitleDto.class),
-            mediaType = "application/json") })
+    @ApiResponse(responseCode = "200", content = {@Content(schema = @Schema(implementation = EducationTitleDto.class),
+            mediaType = "application/json")})
     @GetMapping("/")
     public ResponseEntity<List<EducationTitleDto>> getAll() {
         return new ResponseEntity<>(educationTitleService.getAll(), HttpStatus.OK);
@@ -37,10 +36,10 @@ public class EducationTitleController {
 
     @Operation(summary = "Retrieve EducationTitle entity by id.")
     @ApiResponses({
-            @ApiResponse(responseCode = "200", content = { @Content(schema = @Schema(implementation = EducationTitleDto.class),
-                    mediaType = "application/json") }),
-            @ApiResponse(responseCode = "404", content = { @Content(schema = @Schema(implementation = ErrorDetailsDto.class),
-                    mediaType = "application/json") })
+            @ApiResponse(responseCode = "200", content = {@Content(schema = @Schema(implementation = EducationTitleDto.class),
+                    mediaType = "application/json")}),
+            @ApiResponse(responseCode = "404", content = {@Content(schema = @Schema(implementation = ErrorDetailsDto.class),
+                    mediaType = "application/json")})
     })
     @GetMapping("/{id}")
     public ResponseEntity<EducationTitleDto> getById(@PathVariable(value = "id") long id) {
@@ -49,10 +48,10 @@ public class EducationTitleController {
 
     @Operation(summary = "Create new EducationTitle entity.")
     @ApiResponses({
-            @ApiResponse(responseCode = "201", content = { @Content(schema = @Schema(implementation = EducationTitleDto.class),
-                    mediaType = "application/json") }),
-            @ApiResponse(responseCode = "400", content = { @Content(schema = @Schema(implementation = ErrorDetailsDto.class),
-                    mediaType = "application/json") })
+            @ApiResponse(responseCode = "201", content = {@Content(schema = @Schema(implementation = EducationTitleDto.class),
+                    mediaType = "application/json")}),
+            @ApiResponse(responseCode = "400", content = {@Content(schema = @Schema(implementation = ErrorDetailsDto.class),
+                    mediaType = "application/json")})
     })
     @PostMapping("/")
     public ResponseEntity<EducationTitleDto> create(@RequestBody EducationTitleDto departmentDto) {
@@ -61,24 +60,24 @@ public class EducationTitleController {
 
     @Operation(summary = "Update EducationTitle entity by id.")
     @ApiResponses({
-            @ApiResponse(responseCode = "200", content = { @Content(schema = @Schema(implementation = EducationTitleDto.class),
-                    mediaType = "application/json") }),
-            @ApiResponse(responseCode = "400", content = { @Content(schema = @Schema(implementation = ErrorDetailsDto.class),
-                    mediaType = "application/json") }),
-            @ApiResponse(responseCode = "404", content = { @Content(schema = @Schema(implementation = ErrorDetailsDto.class),
-                    mediaType = "application/json") })
+            @ApiResponse(responseCode = "200", content = {@Content(schema = @Schema(implementation = EducationTitleDto.class),
+                    mediaType = "application/json")}),
+            @ApiResponse(responseCode = "400", content = {@Content(schema = @Schema(implementation = ErrorDetailsDto.class),
+                    mediaType = "application/json")}),
+            @ApiResponse(responseCode = "404", content = {@Content(schema = @Schema(implementation = ErrorDetailsDto.class),
+                    mediaType = "application/json")})
     })
     @PutMapping("/{id}")
     public ResponseEntity<EducationTitleDto> update(@PathVariable(value = "id") long id,
-                                                   @RequestBody EducationTitleDto departmentDto) {
+                                                    @RequestBody EducationTitleDto departmentDto) {
         return new ResponseEntity<>(educationTitleService.update(id, departmentDto), HttpStatus.OK);
     }
 
     @Operation(summary = "Delete EducationTitle entity by id.")
     @ApiResponses({
-            @ApiResponse(responseCode = "200", content = { @Content(mediaType = "text/plain") }),
-            @ApiResponse(responseCode = "404", content = { @Content(schema = @Schema(implementation = ErrorDetailsDto.class),
-                    mediaType = "application/json") })
+            @ApiResponse(responseCode = "200", content = {@Content(mediaType = "text/plain")}),
+            @ApiResponse(responseCode = "404", content = {@Content(schema = @Schema(implementation = ErrorDetailsDto.class),
+                    mediaType = "application/json")})
     })
     @DeleteMapping("/{id}")
     public ResponseEntity<String> delete(@PathVariable(value = "id") long id) {
