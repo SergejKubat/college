@@ -1,6 +1,6 @@
 # College
 
-Simple Spring Boot application designed to manage basic information about a college.
+Spring Boot application designed to manage basic information about a college.
 
 ## Table of Contents
 
