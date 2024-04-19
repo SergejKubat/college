@@ -39,7 +39,7 @@ public class MemberRepositoryTest {
 
         ScientificField testScientificField = new ScientificField(null, "Scientific field 1");
 
-        Member testMember = new Member(null, "", "", testDepartment, testAcademicTitle,
+        Member testMember = new Member(null, "John", "Doe", testDepartment, testAcademicTitle,
                 testEducationTitle, testScientificField);
 
         departmentRepository.save(testDepartment);

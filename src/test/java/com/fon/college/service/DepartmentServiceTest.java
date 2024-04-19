@@ -1,6 +1,7 @@
 package com.fon.college.service;
 
 import com.fon.college.domain.Department;
+import com.fon.college.exception.ResourceNotFoundException;
 import com.fon.college.payload.DepartmentDto;
 import com.fon.college.repository.DepartmentRepository;
 import org.junit.jupiter.api.DisplayName;
@@ -35,9 +36,9 @@ public class DepartmentServiceTest {
 
         when(departmentRepository.findAll()).thenReturn(departments);
 
-        List<DepartmentDto> departmentDtos = departmentService.getAll();
+        List<DepartmentDto> departmentDtoList = departmentService.getAll();
 
-        assertEquals(departments.size(), departmentDtos.size());
+        assertEquals(departments.size(), departmentDtoList.size());
     }
 
     @Test
@@ -52,6 +53,16 @@ public class DepartmentServiceTest {
         DepartmentDto departmentDto = departmentService.getById(departmentId);
 
         assertNotNull(departmentDto);
+    }
+
+    @Test
+    @DisplayName("Get department by id - failure")
+    void getDepartmentByIdFailureTest() {
+        long departmentId = 1L;
+
+        assertThrows(ResourceNotFoundException.class, () -> {
+            departmentService.getById(departmentId);
+        });
     }
 
     @Test
@@ -86,6 +97,21 @@ public class DepartmentServiceTest {
     }
 
     @Test
+    @DisplayName("Update department - failure")
+    void updateDepartmentFailureTest() {
+        long departmentId = 1L;
+
+        DepartmentDto departmentDto = new DepartmentDto();
+
+        departmentDto.setName("Updated name");
+        departmentDto.setShortName("Updated short name");
+
+        assertThrows(ResourceNotFoundException.class, () -> {
+            departmentService.update(departmentId, departmentDto);
+        });
+    }
+
+    @Test
     @DisplayName("Delete department")
     void deleteDepartmentTest() {
         long departmentId = 1L;
@@ -97,5 +123,15 @@ public class DepartmentServiceTest {
         departmentService.delete(departmentId);
 
         verify(departmentRepository, times(1)).delete(department);
+    }
+
+    @Test
+    @DisplayName("Delete department - failure")
+    void deleteDepartmentFailureTest() {
+        long departmentId = 1L;
+
+        assertThrows(ResourceNotFoundException.class, () -> {
+            departmentService.delete(departmentId);
+        });
     }
 }
