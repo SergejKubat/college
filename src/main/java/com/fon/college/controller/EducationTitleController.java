@@ -54,8 +54,8 @@ public class EducationTitleController {
                     mediaType = "application/json")})
     })
     @PostMapping("/")
-    public ResponseEntity<EducationTitleDto> create(@RequestBody EducationTitleDto departmentDto) {
-        return new ResponseEntity<>(educationTitleService.create(departmentDto), HttpStatus.CREATED);
+    public ResponseEntity<EducationTitleDto> create(@RequestBody EducationTitleDto educationTitleDto) {
+        return new ResponseEntity<>(educationTitleService.create(educationTitleDto), HttpStatus.CREATED);
     }
 
     @Operation(summary = "Update EducationTitle entity by id.")
@@ -69,8 +69,8 @@ public class EducationTitleController {
     })
     @PutMapping("/{id}")
     public ResponseEntity<EducationTitleDto> update(@PathVariable(value = "id") long id,
-                                                    @RequestBody EducationTitleDto departmentDto) {
-        return new ResponseEntity<>(educationTitleService.update(id, departmentDto), HttpStatus.OK);
+                                                    @RequestBody EducationTitleDto educationTitleDto) {
+        return new ResponseEntity<>(educationTitleService.update(id, educationTitleDto), HttpStatus.OK);
     }
 
     @Operation(summary = "Delete EducationTitle entity by id.")

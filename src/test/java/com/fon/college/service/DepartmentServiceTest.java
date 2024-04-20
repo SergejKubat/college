@@ -89,6 +89,7 @@ public class DepartmentServiceTest {
         Department department = new Department(departmentId, "Department 1", "Dept 1");
 
         when(departmentRepository.findById(departmentId)).thenReturn(Optional.of(department));
+
         when(departmentRepository.save(any(Department.class))).thenReturn(department);
 
         DepartmentDto updatedDepartmentDto = departmentService.update(departmentId, departmentDto);
