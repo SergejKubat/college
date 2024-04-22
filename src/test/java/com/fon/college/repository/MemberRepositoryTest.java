@@ -69,9 +69,7 @@ public class MemberRepositoryTest {
     @Test
     @DisplayName("Find all members by department id - empty.")
     void selectByDepartmentIdTestingNotFound() {
-        List<Member> members = memberRepository.findAllByDepartmentId(2L);
-
-        System.out.println("Size: " + members.size());
+        List<Member> members = memberRepository.findAllByDepartmentId(10L);
 
         assertTrue(members.isEmpty());
     }

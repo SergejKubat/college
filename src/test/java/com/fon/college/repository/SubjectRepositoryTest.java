@@ -52,7 +52,7 @@ public class SubjectRepositoryTest {
     @Test
     @DisplayName("Find subjects by department id - empty.")
     void selectByDepartmentIdTestingNotFound() {
-        List<Subject> subjects = subjectRepository.findAllByDepartmentId(2L);
+        List<Subject> subjects = subjectRepository.findAllByDepartmentId(10L);
 
         assertTrue(subjects.isEmpty());
     }
