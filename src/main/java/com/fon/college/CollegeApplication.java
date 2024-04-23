@@ -15,9 +15,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
                         url = "https://github.com/SergejKubat/")),
         servers = @Server(url = "http://localhost:8080", description = "Development server"))
 public class CollegeApplication {
-
     public static void main(String[] args) {
         SpringApplication.run(CollegeApplication.class, args);
     }
-
 }

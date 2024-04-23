@@ -3,12 +3,12 @@ package com.fon.college.component;
 import com.fon.college.domain.*;
 import com.fon.college.repository.*;
 import org.springframework.boot.CommandLineRunner;
-import org.springframework.stereotype.Component;
+//import org.springframework.stereotype.Component;
 
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
-@Component
+//@Component
 public class DatabaseSeeder implements CommandLineRunner {
     private final DepartmentRepository _departmentRepository;
     private final SubjectRepository _subjectRepository;
